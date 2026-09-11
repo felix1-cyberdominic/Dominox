@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dominox — Accessible Domino Playground</title>
+  <meta name="description" content="Dominox: an accessible, keyboard-friendly domino tile playground. Add, flip, and remove domino tiles." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header>
+    <h1>Dominox</h1>
+    <p class="tagline">Accessible domino tile playground — keyboard & screen-reader friendly.</p>
+  </header>
+
+  <nav aria-label="Main navigation">
+    <ul>
+      <li><a href="#play">Play</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
+
+  <main id="main">
+    <section id="play" aria-labelledby="play-heading">
+      <h2 id="play-heading">Play</h2>
+
+      <form id="tileForm" aria-describedby="form-desc">
+        <p id="form-desc">Add a domino tile by entering the left and right pip values (0–12). Use Tab to navigate and Enter to submit.</p>
+
+        <div class="row">
+          <label for="left">Left value</label>
+          <input id="left" name="left" type="number" min="0" max="12" value="6" required />
+        </div>
+
+        <div class="row">
+          <label for="right">Right value</label>
+          <input id="right" name="right" type="number" min="0" max="12" value="6" required />
+        </div>
+
+        <div class="row actions">
+          <button id="addTile" type="submit">Add tile</button>
+          <button id="clearAll" type="button">Clear all</button>
+        </div>
+      </form>
+
+      <p class="instructions">Tiles are presented as buttons. Activate (Enter/Space) to flip, Delete to remove focused tile. Use Left/Right arrows to move focus between tiles.</p>
+
+      <ul id="tiles" class="tiles" role="list" aria-label="Domino tiles">
+        <!-- tiles go here -->
+      </ul>
+    </section>
+
+    <aside id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading">About Dominox</h2>
+      <p>Dominox is a small demo application intended to show an accessible frontend you can deploy on Vercel. It's intentionally lightweight (no frameworks) and built with accessibility best practices: landmarks, keyboard support, clear focus styles, and semantic markup.</p>
+
+      <h3>Accessibility features</h3>
+      <ul>
+        <li>Skip link to main content</li>
+        <li>Keyboard navigation for tiles (Left/Right, Enter/Space, Delete)</li>
+        <li>ARIA roles and labels for assistive tech</li>
+        <li>High-contrast colors and visible focus outlines</li>
+      </ul>
+
+      <h3>Deploy</h3>
+      <p>To deploy the frontend on Vercel: see the repository README or the Vercel docs. The site is static and will deploy automatically when you import this repository into Vercel.</p>
+    </aside>
+  </main>
+
+  <footer>
+    <p>Built with accessibility in mind — Dominox</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
