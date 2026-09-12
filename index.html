@@ -1,77 +1,149 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Dominox — Accessible Domino Playground</title>
-  <meta name="description" content="Dominox: an accessible, keyboard-friendly domino tile playground. Add, flip, and remove domino tiles." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dominox Support - AI-Powered Customer Support</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to main content</a>
+  
   <header>
-    <h1>Dominox</h1>
-    <p class="tagline">Accessible domino tile playground — keyboard & screen-reader friendly.</p>
+    <div class="header-container">
+      <h1>Dominox Support</h1>
+      <p class="tagline">AI-Powered Customer Support System</p>
+    </div>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="#" onclick="showSection('submit-form'); return false;" class="nav-link active">Submit Request</a></li>
+        <li><a href="#" onclick="showSection('dashboard'); return false;" class="nav-link">My Requests</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <nav aria-label="Main navigation">
-    <ul>
-      <li><a href="#play">Play</a></li>
-      <li><a href="#about">About</a></li>
-    </ul>
-  </nav>
-
-  <main id="main">
-    <section id="play" aria-labelledby="play-heading">
-      <h2 id="play-heading">Play</h2>
-
-      <form id="tileForm" aria-describedby="form-desc">
-        <p id="form-desc">Add a domino tile by entering the left and right pip values (0–12). Use Tab to navigate and Enter to submit.</p>
-
-        <div class="row">
-          <label for="left">Left value</label>
-          <input id="left" name="left" type="number" min="0" max="12" value="6" required />
+  <main id="main" class="container">
+    <!-- Submit Support Request Section -->
+    <section id="submit-form" class="section active" aria-labelledby="submit-heading">
+      <h2 id="submit-heading">Submit a Support Request</h2>
+      
+      <form id="supportForm" class="form" novalidate>
+        <div class="form-group">
+          <label for="name">Full Name *</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            placeholder="John Doe"
+            required
+            aria-required="true"
+            aria-describedby="name-error"
+          />
+          <span id="name-error" class="error-message" role="alert"></span>
         </div>
 
-        <div class="row">
-          <label for="right">Right value</label>
-          <input id="right" name="right" type="number" min="0" max="12" value="6" required />
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="john@example.com"
+            required
+            aria-required="true"
+            aria-describedby="email-error"
+          />
+          <span id="email-error" class="error-message" role="alert"></span>
         </div>
 
-        <div class="row actions">
-          <button id="addTile" type="submit">Add tile</button>
-          <button id="clearAll" type="button">Clear all</button>
+        <div class="form-group">
+          <label for="subject">Issue Subject *</label>
+          <input
+            id="subject"
+            name="subject"
+            type="text"
+            placeholder="Brief description of your issue"
+            required
+            aria-required="true"
+            aria-describedby="subject-error"
+          />
+          <span id="subject-error" class="error-message" role="alert"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="complaint">Detailed Description *</label>
+          <textarea
+            id="complaint"
+            name="complaint"
+            placeholder="Please provide as much detail as possible about your issue..."
+            required
+            aria-required="true"
+            aria-describedby="complaint-error"
+            rows="6"
+          ></textarea>
+          <span id="complaint-error" class="error-message" role="alert"></span>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Submit Request</button>
+          <button type="reset" class="btn btn-secondary">Clear Form</button>
         </div>
       </form>
 
-      <p class="instructions">Tiles are presented as buttons. Activate (Enter/Space) to flip, Delete to remove focused tile. Use Left/Right arrows to move focus between tiles.</p>
-
-      <ul id="tiles" class="tiles" role="list" aria-label="Domino tiles">
-        <!-- tiles go here -->
-      </ul>
+      <div id="response-container" class="response-container hidden">
+        <div class="response-card">
+          <h3>AI-Generated Response</h3>
+          <div id="ai-response" class="response-text"></div>
+          <div class="response-metadata">
+            <p><strong>Status:</strong> <span id="response-status" class="status-badge">AI Responded</span></p>
+            <p><strong>Urgency:</strong> <span id="response-urgency" class="urgency-badge"></span></p>
+            <p><strong>Category:</strong> <span id="response-category"></span></p>
+          </div>
+          <button onclick="showSection('dashboard')" class="btn btn-primary mt-2">View My Requests</button>
+        </div>
+      </div>
     </section>
 
-    <aside id="about" aria-labelledby="about-heading">
-      <h2 id="about-heading">About Dominox</h2>
-      <p>Dominox is a small demo application intended to show an accessible frontend you can deploy on Vercel. It's intentionally lightweight (no frameworks) and built with accessibility best practices: landmarks, keyboard support, clear focus styles, and semantic markup.</p>
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="section" aria-labelledby="dashboard-heading">
+      <h2 id="dashboard-heading">My Support Requests</h2>
+      
+      <div class="dashboard-filters">
+        <div class="filter-group">
+          <label for="filter-email">Filter by Email:</label>
+          <input
+            id="filter-email"
+            type="email"
+            placeholder="your@email.com"
+            aria-label="Filter requests by email"
+          />
+        </div>
+        <div class="filter-group">
+          <label for="filter-status">Filter by Status:</label>
+          <select id="filter-status" aria-label="Filter requests by status">
+            <option value="">All Statuses</option>
+            <option value="Pending">Pending</option>
+            <option value="AI Responded">AI Responded</option>
+            <option value="Resolved">Resolved</option>
+          </select>
+        </div>
+        <button onclick="loadDashboard()" class="btn btn-secondary">Apply Filters</button>
+      </div>
 
-      <h3>Accessibility features</h3>
-      <ul>
-        <li>Skip link to main content</li>
-        <li>Keyboard navigation for tiles (Left/Right, Enter/Space, Delete)</li>
-        <li>ARIA roles and labels for assistive tech</li>
-        <li>High-contrast colors and visible focus outlines</li>
-      </ul>
+      <div id="dashboard-stats" class="dashboard-stats"></div>
 
-      <h3>Deploy</h3>
-      <p>To deploy the frontend on Vercel: see the repository README or the Vercel docs. The site is static and will deploy automatically when you import this repository into Vercel.</p>
-    </aside>
+      <div id="requests-list" class="requests-list" role="list" aria-label="Support requests"></div>
+      
+      <div id="no-requests" class="empty-state hidden" role="status" aria-live="polite">
+        <p>No support requests found. <a href="#" onclick="showSection('submit-form'); return false;">Submit one now</a></p>
+      </div>
+    </section>
   </main>
 
   <footer>
-    <p>Built with accessibility in mind — Dominox</p>
+    <p>&copy; 2024 Dominox Support. Powered by AI. All rights reserved.</p>
   </footer>
 
-  <script src="script.js" defer></script>
+  <script src="dashboard.js" defer></script>
 </body>
 </html>
